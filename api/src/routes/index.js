@@ -95,31 +95,33 @@ const nameApi = async (name) => {
   try {
     const urlApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 
-    const urlData = await urlApi.data;
-    console.log(urlData);
+    let urlData = await urlApi.data;
+    // console.log(urlData);
 
     //arrNamesApi.push({
-    // urlData = {
-    //   id: urlData.id,
-    //   name: urlData.name,
-    //   types:
-    //     urlData.types.length < 2
-    //       ? [urlData.types[0].type.name]
-    //       : [urlData.types[0].type.name, urlData.types[1].type.name],
-    //   image: urlData.sprites.front_default,
-    //   hp: urlData.stats[0].base_stat,
-    //   attack: urlData.stats[1].base_stat,
-    //   defense: urlData.stats[2].base_stat,
-    //   speed: urlData.stats[5].base_stat,
-    //   height: urlData.height,
-    //   weight: urlData.weight,
-    // };
+    urlData = [
+      {
+        id: urlData.id,
+        name: urlData.name,
+        types:
+          urlData.types.length < 2
+            ? [urlData.types[0].type.name]
+            : [urlData.types[0].type.name, urlData.types[1].type.name],
+        image: urlData.sprites.front_default,
+        hp: urlData.stats[0].base_stat,
+        attack: urlData.stats[1].base_stat,
+        defense: urlData.stats[2].base_stat,
+        speed: urlData.stats[5].base_stat,
+        height: urlData.height,
+        weight: urlData.weight,
+      },
+    ];
     //});
     //console.log(urlApi);
-    if (!urlData.name && !urlData.hp) {
-      res.send("toni");
-    }
-    // return urlData;
+    // if (!urlData.name && !urlData.hp) {
+    //   res.send("toni");
+    // }
+    return urlData;
   } catch (error) {
     console.log(error);
   }
@@ -160,38 +162,48 @@ const nameDb = async (name) => {
   }
 };
 
-const allNames = async (name) => {
-  const apiName = await nameApi(name);
-  const dbName = await nameDb(name);
-  const todosNames = dbName.concat(apiName);
-  // console.log(todosNames); //array con undefined
-  return todosNames;
-};
-
 router.get("/pokemons", async (req, res) => {
   const { name } = req.query;
-  const infoTotal = await allPokemons();
-  if (name) {
-    const dataName = await allNames(name);
-    //  console.log(dataName); //array con undefined
-    dataName.length
-      ? res.send(dataName)
-      : res.status(404).send("This pokemon does not exist");
-    return;
-  } else {
-    res.status(200).send(infoTotal);
-    return;
+  try {
+    const infoTotal = await allPokemons();
+    if (name) {
+      const apiName = await nameApi(name);
+      if (!apiName) {
+        const dbName = await nameDb(name);
+        if (!dbName) {
+          res.status(404).send("This pokemon does not exist"); //no me toma esto siempre me devuelve 200, me tira Error: Request failed with status code 404
+        } else {
+          return res.send(dbName);
+        }
+      } else {
+        return res.send(apiName);
+      }
+    }
+    return res.status(200).send(infoTotal);
+  } catch (error) {
+    console.log(error);
   }
 });
+//   if (name) {
+//     const dataName = await allNames(name);
+//     //  console.log(dataName); //array con undefined
+//     dataName.length
+//       ? res.send(dataName)
+//       : res.status(404).send("This pokemon does not exist");
+//     return;
+//   } else {
+//     res.status(200).send(infoTotal);
+//     return;
+//   }
 
-router.get("/prueba", async (req, res) => {
-  const { name } = req.query;
-  const pokemonsApi = await nameApi(name);
-  //console.log(pokemonsApi);
-  //me tira undefined si le paso uno que no existe
-  return res.send(pokemonsApi);
-  // pokemonsApi ? res.send([pokemonsApi]) : res.send([]);
-});
+// router.get("/prueba", async (req, res) => {
+//   const { name } = req.query;
+//   const pokemonsApi = await nameApi(name);
+//   //console.log(pokemonsApi);
+//   //me tira undefined si le paso uno que no existe
+//   return res.send(pokemonsApi);
+//   // pokemonsApi ? res.send([pokemonsApi]) : res.send([]);
+// });
 
 // router.get("/prueba", async (req, res) => {
 //   const { name } = req.query;
@@ -328,5 +340,26 @@ router.get("/types", async (req, res) => {
   const typesAll = await allTypes();
   res.send(typesAll);
 });
+
+//no m funciona revisar
+// const eliminarPoke = async (id) => {
+//   try {
+//     const buscarPoke = await Pokemon.findByPk(id);
+//     if (buscarPoke) {
+//       await Pokemon.destroy({ where: { id: id } });
+//       res.send("Successfully eliminated Pokemon");
+//     } else {
+//       res.send("Please, try again");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// router.delete("/delete/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const pokeEliminado = await eliminarPoke(id);
+//   res.send(pokeEliminado);
+// });
 
 module.exports = router;
