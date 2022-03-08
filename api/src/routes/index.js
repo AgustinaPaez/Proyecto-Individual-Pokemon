@@ -166,7 +166,7 @@ const nameDb = async (name) => {
 //   const apiNames = await nameApi(name);
 //   const dbName = await nameDb(name);
 //   const todosNames = dbName.concat(apiNames);
-//   return todosNames;
+//   return todosNames; modifico para no guardar esto
 // };
 
 router.get("/pokemons", async (req, res) => {
