@@ -162,6 +162,13 @@ const nameDb = async (name) => {
   }
 };
 
+// const allNames = async (name) => {
+//   const apiNames = await nameApi(name);
+//   const dbName = await nameDb(name);
+//   const todosNames = dbName.concat(apiNames);
+//   return todosNames;
+// };
+
 router.get("/pokemons", async (req, res) => {
   const { name } = req.query;
   try {
@@ -184,17 +191,41 @@ router.get("/pokemons", async (req, res) => {
     console.log(error);
   }
 });
-//   if (name) {
-//     const dataName = await allNames(name);
-//     //  console.log(dataName); //array con undefined
-//     dataName.length
-//       ? res.send(dataName)
-//       : res.status(404).send("This pokemon does not exist");
-//     return;
-//   } else {
-//     res.status(200).send(infoTotal);
-//     return;
+// router.get("/pokemons", async (req, res) => {
+//   const { name } = req.query;
+//   const dataName = await allNames(name);
+//   try {
+//     if (name) {
+//       const nombre = await dataName.filter((d) =>
+//         d.name.toLowerCase().includes(name.toLowerCase())
+//       );
+//       //  console.log(dataName); //array con undefined
+//       nombre.length
+//         ? res.send(nombre)
+//         : res.status(404).send("This pokemon does not exist");
+//       return;
+//     } else {
+//       res.status(200).send(dataName);
+//       return;
+//     }
+//   } catch (error) {
+//     console.log(error);
 //   }
+// });
+// router.get("/dogs", async (req, res) => {
+//   const {name} = req.query
+//   let allDogs = await getAllData();
+// // console.log("ESTO ME TRAE el get de /dogs:" , allDogs)
+
+//     if (name) {
+//     try {
+
+//     const dogName = await allDogs.filter(d => d.name.toLowerCase().includes(name.toLowerCase()));
+
+//        if (dogName.length) return res.status(200).send(dogName)
+//         return res.status(404).send("Dog not found")
+//     } catch (error) {
+//     console.error(error)
 
 // router.get("/prueba", async (req, res) => {
 //   const { name } = req.query;
