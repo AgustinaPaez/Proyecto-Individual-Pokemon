@@ -73,8 +73,6 @@ export function getNamePokemons(payload) {
   };
 }
 
-//me falta la de delete
-
 export function filterByTypes(payload) {
   return {
     type: "FILTER_BY_TYPES",

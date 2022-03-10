@@ -11,6 +11,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokemons: action.payload,
+        allPokemons: action.payload,
       };
     case "GET_TYPES":
       return {
@@ -22,7 +23,8 @@ function rootReducer(state = initialState, action) {
       const typesFilter =
         action.payload === "All"
           ? allPokemonsTypes
-          : allPokemonsTypes.filter((e) => e.types.includes(action.payload));
+          : allPokemonsTypes.filter((e) => e.types?.includes(action.payload));
+      console.log("tipos", typesFilter);
       return {
         ...state,
         pokemons: typesFilter,
@@ -40,27 +42,34 @@ function rootReducer(state = initialState, action) {
     case "FILTER_CREATED":
       const allPokemonsOrigen = state.allPokemons;
       const createdFilter =
-        action.payload === "created"
+        action.payload === "createdInDb"
           ? allPokemonsOrigen.filter((e) => e.createdInDb)
           : allPokemonsOrigen.filter((e) => !e.createdInDb);
+      console.log("duda", createdFilter);
       return {
         ...state,
-        pokemons: action.payload === "All" ? state.allPokemons : createdFilter,
+        pokemons: createdFilter,
       };
     case "ORDER_BY_NAME":
-      let sortArr =
-        action.payload === "asc"
+      const sortArr =
+        action.payload === "All"
+          ? state.allPokemons
+          : action.payload === "asc"
           ? state.pokemons.sort((a, b) => a.name.localeCompare(b.name))
           : state.pokemons.sort((a, b) => b.name.localeCompare(a.name));
+      console.log("nombre", sortArr);
       return {
         ...state,
-        pokemons: action.payload === "none" ? state.allPokemons : sortArr,
+        pokemons: sortArr,
       };
     case "ORDER_BY_ATTACK":
-      let arrSort =
-        action.payload === "asc"
+      const arrSort =
+        action.payload === "All"
+          ? state.allPokemons
+          : action.payload === "asc"
           ? state.pokemons.sort((a, b) => a.attack - b.attack)
           : state.pokemons.sort((a, b) => b.attack - a.attack);
+      console.log("fuerza", arrSort);
       return {
         ...state,
         pokemons: arrSort,

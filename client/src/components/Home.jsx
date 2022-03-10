@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getPokemons, getTypes, filterCreated, filterByTypes, orderByName, orderByAttack } from "../actions";
 import { Link } from "react-router-dom";
 import Card from './Card';
- import Paginado from './Paginado';
-// import SearchBar from './SearchBar';
+import Paginado from './Paginado';
+import SearchBar from './SearchBar';
 
 
 export default function Home(){
@@ -37,20 +37,19 @@ export default function Home(){
         e.preventDefault()
         dispatch(filterByTypes(e.target.value))
         setCurrentPage(1)
+        // setOrden(`Ordenado ${e.target.value}`)
     }
     function handleFilterCreated(e){
-        e.preventDefault();
         dispatch(filterCreated(e.target.value))
         setCurrentPage(1)
+        // setOrden(`Ordenado ${e.target.value}`)
     }
     function handleSort(e){
-        e.preventDefault();
         dispatch(orderByName(e.target.value))
         setCurrentPage(1)
         setOrden(`Ordenado ${e.target.value}`)
     }
     function handleSortAttack(e){
-        e.preventDefault()
         dispatch(orderByAttack(e.target.value))
         setCurrentPage(1)
         setOrden(`Ordenado ${e.target.value}`)
@@ -59,34 +58,35 @@ export default function Home(){
     return(
         <div>
             <Link to= '/pokemon'>Crear Pokemon</Link>
-            <h1>Mi página de pokemons</h1>
+            <h1>Pokepágina: ¡Atrapalos a todos!</h1>
             <button onClick ={handleClick}>Volver a cargar todos los pokemons</button>
             <div>
                 <select onChange={handleSort}>
-                <option value= 'none'>--</option>
-                    <option value = 'asc'>A-Z</option>
+                    <option value= "All">Ordenar por Nombre</option>
+                    <option value = "asc">A-Z</option>
                     <option value= 'desc'>Z-A</option>
                 </select>
                 <select onChange={handleSortAttack}> 
-                    <option value= 'asc'>Ascendente</option>
+                    <option value= "All">Ordenar por Fuerza</option>
+                    <option value= "asc">Ascendente</option>
                     <option value= 'desc'>Descendente</option>
                 </select>
-                <select onChange={handleFilterTypes}>
+                <select onChange={(e)=>handleFilterTypes(e)}>
                     <option value= 'All'>Todos</option>
                     {allTypes?.map((e)=>(
                         <option key={e} value={e}>{e}</option>
                     ))}
                 </select>
-                <select onChange = {handleFilterCreated}>
+                <select onChange = {(e)=>handleFilterCreated(e)}>
                     <option value= 'All'>Todos</option>
-                    <option value= 'created'>Creados</option>
+                    <option value= 'createdInDb'>Creados</option>
                     <option value= 'api'>Existentes</option>
                 </select>
                 <Paginado
                 pokemonsPerPage={pokemonsPerPage}
                 allPokemons={allPokemons.length}
                 paginado = {paginado}/>
-                {/* <SearchBar/> */}
+                <SearchBar/>
                 {
                     currentPokemons?.map(e=>{
                         return(
