@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Card from './Card';
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
+import estilos from './Home.module.css';
 
 
 export default function Home(){
@@ -59,7 +60,7 @@ export default function Home(){
         <div>
             <Link to= '/pokemon'>Crear Pokemon</Link>
             <h1>Pokepágina: ¡Atrapalos a todos!</h1>
-            <button onClick ={handleClick}>Volver a cargar todos los pokemons</button>
+            <button className= {estilos.btn} onClick ={handleClick}>Volver a cargar todos los pokemons</button>
             <div>
                 <select onChange={handleSort}>
                     <option value= "All">Ordenar por Nombre</option>

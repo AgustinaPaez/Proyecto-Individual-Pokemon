@@ -10,7 +10,7 @@ export default function SearchBar(){
 
     function handleInputChange(e){
         e.preventDefault()
-        setName(e.target.value)
+        setName(e.target.value.toLowerCase())
         console.log(name)
     }
     const buscarPoke = pokemons.find((e)=> e.name === name)

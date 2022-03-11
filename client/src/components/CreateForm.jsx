@@ -62,13 +62,13 @@ export default function CreateForm(){
                 <div>
                     <label>Nombre:</label>
                     <input type= 'text'
-                    onChange={(e)=>setObjeto({...objeto, name: e.target.value})}
+                    onChange={(e)=>setObjeto({...objeto, name: e.target.value.toLowerCase()})}
                     />
                 </div>
                 <div>
                     <label>Imagen:</label>
-                    <input type='text'
-                    placeholder="Optativa:inserte url..."
+                    <input type='url' id='url' name='url'
+                    placeholder="Url opcional..."
                     onChange={(e)=>setObjeto({...objeto, image: e.target.value})}
                     />
                 </div>
