@@ -78,6 +78,7 @@ const dbInfo = async () => {
       weight: d.weight,
       image: d.image,
       types: d.types.map((el) => el.name),
+      createdInDb: d.createdInDb,
     };
   });
   return arrLista;
@@ -85,7 +86,7 @@ const dbInfo = async () => {
 const allPokemons = async () => {
   const apiPokes = await apiInfo();
   const dbPokes = await dbInfo();
-  const todosPokes = dbPokes.concat(apiPokes);
+  const todosPokes = apiPokes.concat(dbPokes);
   return todosPokes;
 };
 
@@ -153,6 +154,7 @@ const nameDb = async (name) => {
         speed: p.speed,
         height: p.height,
         weight: p.weight,
+        createdInDb: p.createdInDb,
       };
     });
     // console.log(pokemonDb);
@@ -282,6 +284,7 @@ const idDb = async (id) => {
       speed: dbPoke.speed,
       height: dbPoke.height,
       weight: dbPoke.weight,
+      createdInDb: dbPoke.createdInDb,
     };
   } catch (error) {
     console.log(error);
@@ -321,7 +324,8 @@ router.post("/pokemon", async (req, res) => {
   } = req.body;
   const crearPoke = await Pokemon.create({
     name,
-    image,
+    image:
+      image || "https://pokemon-project.com/espadaescudo/img/pokemon/132.png",
     hp,
     attack,
     defense,
