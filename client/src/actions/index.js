@@ -100,3 +100,10 @@ export function orderByAttack(payload) {
     payload,
   };
 }
+
+// export const cleanDetail = () => {
+//   return {
+//     type: "GET_DETAILS",
+//     payload: [],
+//   };
+// };

@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getTypes, postPokemon } from "../actions";
 import { Link } from "react-router-dom";
+import estilos from './CreateForm.module.css'
 
 
 export default function CreateForm(){
@@ -56,80 +57,89 @@ export default function CreateForm(){
 
     return (
         <div>
-            <Link to= '/home'><button>Volver</button></Link>
+            <Link to= '/home'><button className={estilos.btn}>Volver</button></Link>
             <h1>¡Crea tu Pokemon!</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre:</label>
+            <form onSubmit={handleSubmit} className={estilos.todo}>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Nombre:</label>
                     <input type= 'text'
                     onChange={(e)=>setObjeto({...objeto, name: e.target.value.toLowerCase()})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Imagen:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Imagen:</label>
                     <input type='url' id='url' name='url'
                     placeholder="Url opcional..."
                     onChange={(e)=>setObjeto({...objeto, image: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Vida:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Vida:</label>
                     <input type='number'
                     placeholder="0-200"
                     onChange={(e)=>setObjeto({...objeto, hp: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Ataque:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Ataque:</label>
                     <input type='number'
                     placeholder="0-200"
                     onChange={(e)=>setObjeto({...objeto, attack: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Defensa:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Defensa:</label>
                     <input type='number'
                     placeholder="0-200"
                     onChange={(e)=>setObjeto({...objeto, defense: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Velocidad:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Velocidad:</label>
                     <input type='number'
                     placeholder="0-300"
                     onChange={(e)=>setObjeto({...objeto, speed: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Altura:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Altura:</label>
                     <input type='number'
                     placeholder="0-100"
                     onChange={(e)=>setObjeto({...objeto, height: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Peso:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Peso:</label>
                     <input type='number'
                     placeholder="0-1000"
                     onChange={(e)=>setObjeto({...objeto, weight: e.target.value})}
+                    className={estilos.contenedor}
                     />
                 </div>
-                <div>
-                    <label>Tipos:</label>
+                <div className={estilos.cuadro}>
+                    <label className={estilos.palabra}>Tipos:</label>
                     {myTypes?.map((e)=>(
-                        <label key={e}>
+                        <label key={e} className={estilos.palabra}>
                             <input 
                             type='checkbox'
                             name={e}
                             value={e}
                             onChange={handleTypes}
+                            
                             />
-                    {e}
+                    {e}{" "}
                         </label>
                     ))}
                 </div>
                 <div>
-                    <button type= 'submit'>¡Agregar Pokemon!</button>
+                    <button type= 'submit' className={estilos.otro}>¡Agregar Pokemon!</button>
                 </div>
             </form>
         </div>
