@@ -1,0 +1,19 @@
+.btn {
+  background-color: rgb(16, 66, 100);
+  border: none;
+  padding: 10px;
+  border-radius: 0px 10px 10px 0px;
+  color: rgba(247, 239, 239, 0.801);
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(34, 32, 129);
+}
+
+.contenedor {
+  background-color: rgba(216, 210, 210, 0.925);
+  height: 1.9rem;
+  border-radius: 10px 0px 0px 10px;
+  padding-left: 0.5rem;
+}

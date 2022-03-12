@@ -1,10 +1,42 @@
-.btn {
-  background-color: rgb(83, 177, 83);
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
+html body {
+  background: url("../img/backgroundpoke.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  background-color: rgb(16, 66, 100);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: rgba(247, 239, 239, 0.801);
+}
+
 .btn:hover {
   cursor: pointer;
-  background-color: rgb(34, 129, 34);
+  background-color: rgb(34, 32, 129);
+}
+.acomodar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem 6rem;
+  margin-top: 2rem;
+}
+
+.separar {
+  display: flex;
+  gap: 46rem;
+}
+.separacion {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 3em;
+}
+
+.titulo {
+  color: rgb(52, 137, 194);
 }

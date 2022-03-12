@@ -1,5 +1,19 @@
+.body {
+  background-image: url("../img/landing.jpg");
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.letra {
+  color: rgb(150 236 143);
+}
+
 .btn {
-  background-color: rgb(63, 63, 177);
+  background-color: rgb(90 179 238);
   border: none;
   padding: 10px;
   border-radius: 10px;
@@ -8,5 +22,5 @@
 
 .btn:hover {
   cursor: pointer;
-  background-color: rgb(27, 10, 102);
+  background-color: rgb(185 35 34);
 }

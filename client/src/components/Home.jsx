@@ -57,37 +57,42 @@ export default function Home(){
     }
 
     return(
-        <div>
-            <Link to= '/pokemon'>Crear Pokemon</Link>
-            <h1>Pokepágina: ¡Atrapalos a todos!</h1>
+        <div className={estilos.body}>
+            <h1 className={estilos.titulo}>Pokepágina: ¡Atrapalos a todos!</h1>
+            <div className={estilos.separar}>
             <button className= {estilos.btn} onClick ={handleClick}>Volver a cargar todos los pokemons</button>
+            <Link to= '/pokemon'><button className= {estilos.btn}>Crear Pokemon</button></Link>
+            </div>
             <div>
-                <select onChange={handleSort}>
+                <div className={estilos.separacion}>
+                <select onChange={handleSort} className= {estilos.btn}>
                     <option value= "All">Ordenar por Nombre</option>
                     <option value = "asc">A-Z</option>
                     <option value= 'desc'>Z-A</option>
                 </select>
-                <select onChange={handleSortAttack}> 
+                <select onChange={handleSortAttack} className= {estilos.btn}> 
                     <option value= "All">Ordenar por Fuerza</option>
                     <option value= "asc">Ascendente</option>
                     <option value= 'desc'>Descendente</option>
                 </select>
-                <select onChange={(e)=>handleFilterTypes(e)}>
+                <select onChange={(e)=>handleFilterTypes(e)} className= {estilos.btn}>
                     <option value= 'All'>Todos</option>
                     {allTypes?.map((e)=>(
                         <option key={e} value={e}>{e}</option>
                     ))}
                 </select>
-                <select onChange = {(e)=>handleFilterCreated(e)}>
+                <select onChange = {(e)=>handleFilterCreated(e)} className= {estilos.btn}>
                     <option value= 'All'>Todos</option>
                     <option value= 'createdInDb'>Creados</option>
                     <option value= 'api'>Existentes</option>
                 </select>
+                <SearchBar/>
+                </div>
                 <Paginado
                 pokemonsPerPage={pokemonsPerPage}
                 allPokemons={allPokemons.length}
                 paginado = {paginado}/>
-                <SearchBar/>
+                <div className={estilos.acomodar}>
                 {
                     currentPokemons?.map(e=>{
                         return(
@@ -95,6 +100,7 @@ export default function Home(){
                         )
                     })
                 }
+                </div>
             </div>
         </div>
     )

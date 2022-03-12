@@ -1,0 +1,18 @@
+.color {
+  background-color: rgb(16, 66, 100);
+  margin: 2rem 1rem 0 1rem;
+
+  border: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: rgba(247, 239, 239, 0.801);
+}
+.color:hover {
+  cursor: pointer;
+  background-color: rgb(34, 32, 129);
+}
+
+.ord {
+  display: flex;
+  justify-content: center;
+}

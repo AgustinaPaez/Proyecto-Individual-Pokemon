@@ -1,0 +1,32 @@
+.carta {
+  display: flex;
+  flex-direction: column;
+  height: 385px;
+  width: 300px;
+  background-color: rgba(125, 187, 241, 0.308);
+  border: 1px solid aliceblue;
+  border-radius: 14px;
+  transition: transform 0.15s;
+  justify-content: center;
+  align-items: center;
+}
+
+.carta:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 15px rgb(243, 221, 221));
+}
+
+.nombre {
+  margin: 0 auto;
+  text-decoration: none;
+  color: black;
+  text-transform: capitalize;
+}
+
+.tipos {
+  display: flex;
+  justify-content: center;
+  color: black;
+  text-transform: capitalize;
+  padding: 0.25rem 0.9rem;
+}
