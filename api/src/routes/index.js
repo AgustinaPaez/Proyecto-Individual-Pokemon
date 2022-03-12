@@ -40,7 +40,7 @@ const apiInfo = async () => {
           speed: p.stats[5].base_stat,
           height: p.height,
           weight: p.weight,
-          image: p.sprites.front_default,
+          image: p.sprites.other.home.front_default,
           types:
             p.types.length < 2
               ? [p.types[0].type.name]
@@ -108,7 +108,7 @@ const nameApi = async (name) => {
           urlData.types.length < 2
             ? [urlData.types[0].type.name]
             : [urlData.types[0].type.name, urlData.types[1].type.name],
-        image: urlData.sprites.front_default,
+        image: urlData.sprites.other.home.front_default,
         hp: urlData.stats[0].base_stat,
         attack: urlData.stats[1].base_stat,
         defense: urlData.stats[2].base_stat,
@@ -255,7 +255,7 @@ const idApi = async (id) => {
         apiData.types.length < 2
           ? [apiData.types[0].type.name]
           : [apiData.types[0].type.name, apiData.types[1].type.name],
-      image: apiData.sprites.front_default,
+      image: apiData.sprites.other.home.front_default,
       hp: apiData.stats[0].base_stat,
       attack: apiData.stats[1].base_stat,
       defense: apiData.stats[2].base_stat,
