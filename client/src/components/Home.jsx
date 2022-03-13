@@ -72,17 +72,17 @@ export default function Home(){
                 </select>
                 <select onChange={handleSortAttack} className= {estilos.btn}> 
                     <option value= "All">Ordenar por Fuerza</option>
-                    <option value= "asc">Ascendente</option>
-                    <option value= 'desc'>Descendente</option>
+                    <option value= "max">Ascendente</option>
+                    <option value= 'min'>Descendente</option>
                 </select>
                 <select onChange={(e)=>handleFilterTypes(e)} className= {estilos.btn}>
-                    <option value= 'All'>Todos</option>
+                    <option value= 'All'>Tipos</option>
                     {allTypes?.map((e)=>(
                         <option key={e} value={e}>{e}</option>
                     ))}
                 </select>
                 <select onChange = {(e)=>handleFilterCreated(e)} className= {estilos.btn}>
-                    <option value= 'All'>Todos</option>
+                    <option value= 'All'>Origen</option>
                     <option value= 'createdInDb'>Creados</option>
                     <option value= 'api'>Existentes</option>
                 </select>

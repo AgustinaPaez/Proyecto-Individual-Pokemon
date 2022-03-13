@@ -9,6 +9,7 @@ import estilos from './CreateForm.module.css'
 export default function CreateForm(){
     const dispatch = useDispatch();
     const myTypes = useSelector((state)=> state.types)
+    // const pokemons =useSelector((state)=> state.pokemons)
 
     const [objeto, setObjeto] =useState({
         name: '',
@@ -43,14 +44,15 @@ export default function CreateForm(){
 
     function handleSubmit(e){
         e.preventDefault();
-        if(!objeto.name) return alert('El nombre es obligatorio')
-        if(objeto.hp < 0 || objeto.hp > 200) return alert('La vida del pokemon debe ser mayor a 0 y menor a 200')
-        if(objeto.attack < 0 || objeto.attack > 200) return alert('La fuerza del pokemon debe ser mayor a 0 y menor a 200')
-        if(objeto.defense < 0 || objeto.defense > 200) return alert('La defensa del pokemon debe ser mayor a 0 y menor a 200')
-        if(objeto.speed < 0 || objeto.speed > 300) return alert('La velocidad del pokemon debe ser mayor a 0 y menor a 300')
-        if(objeto.height < 0 || objeto.height > 100) return alert('La altura del pokemon debe ser mayor a 0 y menor a 100')
-        if(objeto.weight < 0 || objeto.weight > 1000) return alert('El peso del pokemon debe ser mayor a 0 y menor a 1000')
-        
+        // if(pokemons.some((p)=> p.name.toLowerCase()=== objeto.name.toLowerCase()) )return alert('El nombre de este pokemon ya existe')
+        if(!objeto.name) return alert('El nombre es obligatorio y no debe repertirse')
+        if(!objeto.hp || objeto.hp < 0 || objeto.hp > 200) return alert('El campo vida es obligatorio y debe ser mayor a 0 y menor a 200')
+        if(!objeto.attack || objeto.attack < 0 || objeto.attack > 200) return alert('El campo fuerza es obligatorio y debe ser mayor a 0 y menor a 200')
+        if(!objeto.defense || objeto.defense < 0 || objeto.defense > 200) return alert('El campo defensa es obligatorio y debe ser mayor a 0 y menor a 200')
+        if(!objeto.speed || objeto.speed < 0 || objeto.speed > 300) return alert('El campo velocidad es obligatorio y debe ser mayor a 0 y menor a 300')
+        if(!objeto.height ||objeto.height < 0 || objeto.height > 100) return alert('El campo altura es obligatorio y debe ser mayor a 0 y menor a 100')
+        if(!objeto.weight || objeto.weight < 0 || objeto.weight > 1000) return alert('El campo peso es obligatorio y debe ser mayor a 0 y menor a 1000')
+        if(objeto.types.length === 0 || objeto.types.length > 2) return alert('El campo tipos es obligatorio y solo pueden seleccionarse máximo 2 tipos')
         dispatch(postPokemon(objeto));
         alert('¡Pokemon agregado exitosamente!')
     }

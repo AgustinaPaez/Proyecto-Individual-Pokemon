@@ -55,12 +55,8 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? state.allPokemons
           : action.payload === "asc"
-          ? state.pokemons.sort((a, b) =>
-              a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-            )
-          : state.pokemons.sort((a, b) =>
-              b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-            );
+          ? state.pokemons.sort((a, b) => a.name.localeCompare(b.name))
+          : state.pokemons.sort((a, b) => b.name.localeCompare(a.name));
       console.log("nombre", sortArr);
       return {
         ...state,
@@ -70,7 +66,7 @@ function rootReducer(state = initialState, action) {
       const arrSort =
         action.payload === "All"
           ? state.allPokemons
-          : action.payload === "asc"
+          : action.payload === "max"
           ? state.pokemons.sort((a, b) => a.attack - b.attack)
           : state.pokemons.sort((a, b) => b.attack - a.attack);
       console.log("fuerza", arrSort);
