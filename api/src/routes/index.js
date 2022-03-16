@@ -91,15 +91,10 @@ const allPokemons = async () => {
 };
 
 const nameApi = async (name) => {
-  //aca podria hacer una logica de si me pasan un nombre que exista sino tira array vacio ver como la hago
-  //let arrNamesApi = [];
   try {
     const urlApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 
     let urlData = await urlApi.data;
-    // console.log(urlData);
-
-    //arrNamesApi.push({
     urlData = [
       {
         id: urlData.id,
@@ -117,11 +112,6 @@ const nameApi = async (name) => {
         weight: urlData.weight,
       },
     ];
-    //});
-    //console.log(urlApi);
-    // if (!urlData.name && !urlData.hp) {
-    //   res.send("toni");
-    // }
     return urlData;
   } catch (error) {
     console.log(error);
@@ -164,13 +154,6 @@ const nameDb = async (name) => {
   }
 };
 
-// const allNames = async (name) => {
-//   const apiNames = await nameApi(name);
-//   const dbName = await nameDb(name);
-//   const todosNames = dbName.concat(apiNames);
-//   return todosNames; modifico para no guardar esto
-// };
-
 router.get("/pokemons", async (req, res) => {
   const { name } = req.query;
   try {
@@ -180,7 +163,7 @@ router.get("/pokemons", async (req, res) => {
       if (!apiName) {
         const dbName = await nameDb(name);
         if (!dbName) {
-          res.status(404).send("This pokemon does not exist"); //no me toma esto siempre me devuelve 200, me tira Error: Request failed with status code 404
+          res.status(404).send("This pokemon does not exist");
         } else {
           return res.send(dbName);
         }
@@ -193,56 +176,6 @@ router.get("/pokemons", async (req, res) => {
     console.log(error);
   }
 });
-// router.get("/pokemons", async (req, res) => {
-//   const { name } = req.query;
-//   const dataName = await allNames(name);
-//   try {
-//     if (name) {
-//       const nombre = await dataName.filter((d) =>
-//         d.name.toLowerCase().includes(name.toLowerCase())
-//       );
-//       //  console.log(dataName); //array con undefined
-//       nombre.length
-//         ? res.send(nombre)
-//         : res.status(404).send("This pokemon does not exist");
-//       return;
-//     } else {
-//       res.status(200).send(dataName);
-//       return;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-// router.get("/dogs", async (req, res) => {
-//   const {name} = req.query
-//   let allDogs = await getAllData();
-// // console.log("ESTO ME TRAE el get de /dogs:" , allDogs)
-
-//     if (name) {
-//     try {
-
-//     const dogName = await allDogs.filter(d => d.name.toLowerCase().includes(name.toLowerCase()));
-
-//        if (dogName.length) return res.status(200).send(dogName)
-//         return res.status(404).send("Dog not found")
-//     } catch (error) {
-//     console.error(error)
-
-// router.get("/prueba", async (req, res) => {
-//   const { name } = req.query;
-//   const pokemonsApi = await nameApi(name);
-//   //console.log(pokemonsApi);
-//   //me tira undefined si le paso uno que no existe
-//   return res.send(pokemonsApi);
-//   // pokemonsApi ? res.send([pokemonsApi]) : res.send([]);
-// });
-
-// router.get("/prueba", async (req, res) => {
-//   const { name } = req.query;
-//   const pokemonsDb = await nameDb(name);
-//   return res.send(pokemonsDb);
-// });
 
 const idApi = async (id) => {
   try {
@@ -376,25 +309,18 @@ router.get("/types", async (req, res) => {
   res.send(typesAll);
 });
 
-//no m funciona revisar
-// const eliminarPoke = async (id) => {
-//   try {
-//     const buscarPoke = await Pokemon.findByPk(id);
-//     if (buscarPoke) {
-//       await Pokemon.destroy({ where: { id: id } });
-//       res.send("Successfully eliminated Pokemon");
-//     } else {
-//       res.send("Please, try again");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// router.delete("/delete/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const pokeEliminado = await eliminarPoke(id);
-//   res.send(pokeEliminado);
-// });
+router.delete("/pokemons/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (id) {
+      await Pokemon.destroy({
+        where: { id: id },
+      });
+    }
+    return res.send("Pokemon eliminado exitosamente");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;
