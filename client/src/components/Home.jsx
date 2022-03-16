@@ -98,7 +98,7 @@ export default function Home(){
                         return(
                             <Card id={e.id} image={e.image} name={e.name} types={e.types} key={e.id} />
                         )
-                    }) : <div>Pokemon no encontrado</div>
+                    }) : <div><h1 className={estilos.letra}>Lo siento, este pokemon no ha sido encontrado</h1></div>
                 }
                 </div>
             </div>

@@ -40,3 +40,8 @@ html body {
 .titulo {
   color: rgb(52, 137, 194);
 }
+
+.letra {
+  color: rgb(126, 34, 34);
+  margin-left: 18em;
+}

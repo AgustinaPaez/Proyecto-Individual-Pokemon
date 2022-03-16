@@ -79,10 +79,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: arrSort,
       };
-    case "DELETE_POKEMON":
-      return {
-        ...state,
-      };
     default:
       return state;
   }
