@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getPokemons, getTypes, filterCreated, filterByTypes, orderByName, orderByAttack } from "../actions";
+import { getPokemons, getTypes, filterCreated, filterByTypes, orderByName, orderByAttack,cleanDetail} from "../actions";
 import { Link } from "react-router-dom";
 import Card from './Card';
 import Paginado from './Paginado';
@@ -27,6 +27,7 @@ export default function Home(){
     useEffect(()=>{
         dispatch(getPokemons())
         dispatch(getTypes())
+        dispatch(cleanDetail())
     }, [dispatch])
 
     function handleClick(e){
@@ -38,12 +39,10 @@ export default function Home(){
         e.preventDefault()
         dispatch(filterByTypes(e.target.value))
         setCurrentPage(1)
-        // setOrden(`Ordenado ${e.target.value}`)
     }
     function handleFilterCreated(e){
         dispatch(filterCreated(e.target.value))
         setCurrentPage(1)
-        // setOrden(`Ordenado ${e.target.value}`)
     }
     function handleSort(e){
         dispatch(orderByName(e.target.value))
@@ -94,11 +93,12 @@ export default function Home(){
                 paginado = {paginado}/>
                 <div className={estilos.acomodar}>
                 {
+                    allPokemons.length ?
                     currentPokemons?.map(e=>{
                         return(
                             <Card id={e.id} image={e.image} name={e.name} types={e.types} key={e.id} />
                         )
-                    })
+                    }) : <div>Pokemon no encontrado</div>
                 }
                 </div>
             </div>

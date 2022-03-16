@@ -24,7 +24,7 @@ function rootReducer(state = initialState, action) {
         action.payload === "All"
           ? allPokemonsTypes
           : allPokemonsTypes.filter((e) => e.types?.includes(action.payload));
-      console.log("tipos", typesFilter);
+      // console.log("tipos", typesFilter);
       return {
         ...state,
         pokemons: typesFilter,
@@ -39,13 +39,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
+    case "CLEAN_DETAIL":
+      return {
+        ...state,
+        detail: {},
+      };
     case "FILTER_CREATED":
       const allPokemonsOrigen = state.allPokemons;
       const createdFilter =
         action.payload === "createdInDb"
           ? allPokemonsOrigen.filter((e) => e.createdInDb)
           : allPokemonsOrigen.filter((e) => !e.createdInDb);
-      console.log("duda", createdFilter);
+      // console.log("duda", createdFilter);
       return {
         ...state,
         pokemons: createdFilter,
@@ -57,7 +62,7 @@ function rootReducer(state = initialState, action) {
           : action.payload === "asc"
           ? state.pokemons.sort((a, b) => a.name.localeCompare(b.name))
           : state.pokemons.sort((a, b) => b.name.localeCompare(a.name));
-      console.log("nombre", sortArr);
+      // console.log("nombre", sortArr);
       return {
         ...state,
         pokemons: sortArr,
@@ -69,10 +74,14 @@ function rootReducer(state = initialState, action) {
           : action.payload === "max"
           ? state.pokemons.sort((a, b) => a.attack - b.attack)
           : state.pokemons.sort((a, b) => b.attack - a.attack);
-      console.log("fuerza", arrSort);
+      //console.log("fuerza", arrSort);
       return {
         ...state,
         pokemons: arrSort,
+      };
+    case "DELETE_POKEMON":
+      return {
+        ...state,
       };
     default:
       return state;

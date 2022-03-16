@@ -9,7 +9,6 @@ import estilos from './CreateForm.module.css'
 export default function CreateForm(){
     const dispatch = useDispatch();
     const myTypes = useSelector((state)=> state.types)
-    const pokemons =useSelector((state)=> state.pokemons)
 
     const [objeto, setObjeto] =useState({
         name: '',
@@ -43,8 +42,6 @@ export default function CreateForm(){
     }
 
     const nombreValido= /^[a-zA-ZñÑ]+$/i;
-    //const nombreRepetido = pokemons.includes(objeto.name)  || nombreRepetido === true
-    //tambien podria usar el metodo find si la variable q defino tiene length que ahi me tire el alert
 
     function handleSubmit(e){
         e.preventDefault();

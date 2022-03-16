@@ -1,7 +1,7 @@
 import React from "react";
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../actions";
+import { getDetail, deletePokemon } from "../actions";
 import { useEffect } from "react";
 import estilos from './Detail.module.css'
 
@@ -9,17 +9,21 @@ import estilos from './Detail.module.css'
 export default function Detail(){
     const dispatch= useDispatch()
     const {id} =useParams()
+    const myPokemon = useSelector((state)=> state.detail)
+    const navegacion = useNavigate()
     
     useEffect(()=>{
         dispatch(getDetail(id))
-        // return () => {
-        //     dispatch(cleanDetail());
-        //   };
     }, [id,dispatch])
 
-
-
-    const myPokemon = useSelector((state)=> state.detail)
+    function handleDelete(e){
+        e.preventDefault()
+        const confirmacion = window.confirm('¿Estas seguro de que quieres eliminar este pokemon?');
+    if (confirmacion) {
+      dispatch(deletePokemon(myPokemon.id));
+      navegacion('/home');
+    }
+    }
 
     return(
         <div>
@@ -42,6 +46,11 @@ export default function Detail(){
                 <h3>Peso: {myPokemon.weight}</h3>
                 </div>
             </div> 
+                    {
+                        myPokemon.createdInDb && (
+                            <button onClick={handleDelete}>Eliminar</button>
+                        )
+                    }
             </div>
             }
         </div>
