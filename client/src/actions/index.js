@@ -100,6 +100,7 @@ export function orderByAttack(payload) {
     payload,
   };
 }
+
 export function cleanDetail() {
   return {
     type: "CLEAN_DETAIL",

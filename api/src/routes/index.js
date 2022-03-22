@@ -176,28 +176,55 @@ router.get("/pokemons", async (req, res) => {
     console.log(error);
   }
 });
+//ASYNC AWAIT
+// const idApi = async (id) => {
+//   try {
+//     const apiId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+//     const apiData = await apiId.data;
+//     const detail = {
+//       id: apiData.id,
+//       name: apiData.name,
+//       types:
+//         apiData.types.length < 2
+//           ? [apiData.types[0].type.name]
+//           : [apiData.types[0].type.name, apiData.types[1].type.name],
+//       image: apiData.sprites.other.home.front_default,
+//       hp: apiData.stats[0].base_stat,
+//       attack: apiData.stats[1].base_stat,
+//       defense: apiData.stats[2].base_stat,
+//       speed: apiData.stats[5].base_stat,
+//       height: apiData.height,
+//       weight: apiData.weight,
+//     };
+//     //console.log(detail);
+//     return detail;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-const idApi = async (id) => {
+//PROMESAS
+const getApiId = (id) => {
   try {
-    const apiId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const apiData = await apiId.data;
-    const detail = {
-      id: apiData.id,
-      name: apiData.name,
-      types:
-        apiData.types.length < 2
-          ? [apiData.types[0].type.name]
-          : [apiData.types[0].type.name, apiData.types[1].type.name],
-      image: apiData.sprites.other.home.front_default,
-      hp: apiData.stats[0].base_stat,
-      attack: apiData.stats[1].base_stat,
-      defense: apiData.stats[2].base_stat,
-      speed: apiData.stats[5].base_stat,
-      height: apiData.height,
-      weight: apiData.weight,
-    };
-    //console.log(detail);
-    return detail;
+    return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => {
+      let info = res.data;
+      const detail = {
+        id: info.id,
+        name: info.name,
+        types:
+          info.types.length < 2
+            ? [info.types[0].type.name]
+            : [info.types[0].type.name, info.types[1].type.name],
+        image: info.sprites.other.home.front_default,
+        hp: info.stats[0].base_stat,
+        attack: info.stats[1].base_stat,
+        defense: info.stats[2].base_stat,
+        speed: info.stats[5].base_stat,
+        height: info.height,
+        weight: info.weight,
+      };
+      return detail;
+    });
   } catch (error) {
     console.log(error);
   }
@@ -230,7 +257,7 @@ const allId = async (id) => {
     const pokeDb = await idDb(id);
     return pokeDb;
   } else {
-    const pokeApi = await idApi(id);
+    const pokeApi = await getApiId(id);
     return pokeApi;
   }
 };

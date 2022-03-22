@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getPokemons, getTypes, filterCreated, filterByTypes, orderByName, orderByAttack,cleanDetail} from "../actions";
+import { getPokemons, getTypes, filterCreated, filterByTypes, orderByName, orderByAttack, cleanDetail } from "../actions";
 import { Link } from "react-router-dom";
 import Card from './Card';
 import Paginado from './Paginado';
@@ -27,7 +27,7 @@ export default function Home(){
     useEffect(()=>{
         dispatch(getPokemons())
         dispatch(getTypes())
-        dispatch(cleanDetail())
+         dispatch(cleanDetail())
     }, [dispatch])
 
     function handleClick(e){
