@@ -10,6 +10,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+//probando
 const apiInfo = async () => {
   let arrPokemons = []; //me traigo un array de objetos que tienen la url de cada pokemon
   let arrDataPoke = [];
