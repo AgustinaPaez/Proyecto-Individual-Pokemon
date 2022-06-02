@@ -337,4 +337,16 @@ router.get("/types", async (req, res) => {
   res.send(typesAll);
 });
 
+router.delete("/pokemons/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Pokemon.destroy({
+      where: { id: id },
+    });
+
+    return res.send("Pokemon eliminado exitosamente");
+  } catch (error) {
+    console.log(error);
+  }
+});
 module.exports = router;
