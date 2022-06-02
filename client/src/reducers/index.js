@@ -3,6 +3,7 @@ const initialState = {
   allPokemons: [],
   types: [],
   detail: [],
+  Loading: true,
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,6 +13,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: action.payload,
         allPokemons: action.payload,
+        Loading: action.loading,
       };
     case "GET_TYPES":
       return {
@@ -78,6 +80,10 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokemons: arrSort,
+      };
+    case "DELETE_POKEMON":
+      return {
+        ...state,
       };
     default:
       return state;

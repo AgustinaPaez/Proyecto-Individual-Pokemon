@@ -13,6 +13,7 @@
   color: rgba(247, 239, 239, 0.801);
   margin-top: 1rem;
   margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 
 .btn:hover {
@@ -49,4 +50,10 @@
 }
 .palabra {
   padding: -1.5rem;
+}
+.loader{
+  margin-left: 30em;
+}
+.cargando{
+  color: rgb(129, 113, 113)
 }
