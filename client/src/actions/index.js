@@ -1,9 +1,10 @@
 import axios from "axios";
+const BACK_URL = "https://pokepage.herokuapp.com";
 
 export function getPokemons() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("http://localhost:3001/pokemons");
+      const json = await axios.get(`${BACK_URL}/pokemons`);
       return dispatch({
         type: "GET_POKEMONS",
         payload: json.data,
@@ -17,7 +18,7 @@ export function getPokemons() {
 export function getTypes() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("http://localhost:3001/types");
+      const json = await axios.get(`${BACK_URL}/types`);
       return dispatch({
         type: "GET_TYPES",
         payload: json.data,
@@ -31,7 +32,7 @@ export function getTypes() {
 export function postPokemon(payload) {
   return async function (dispatch) {
     try {
-      const json = await axios.post("http://localhost:3001/pokemon", payload);
+      const json = await axios.post(`${BACK_URL}/pokemon/` + payload);
       return dispatch({
         type: "POST_POKEMON",
         payload: json.data,
@@ -45,7 +46,7 @@ export function postPokemon(payload) {
 export function getDetail(payload) {
   return async function (dispatch) {
     try {
-      const json = await axios.get("http://localhost:3001/pokemons/" + payload);
+      const json = await axios.get(`${BACK_URL}/pokemons/` + payload);
       return dispatch({
         type: "GET_DETAIL",
         payload: json.data,
@@ -59,9 +60,7 @@ export function getDetail(payload) {
 export function getNamePokemons(payload) {
   return async function (dispatch) {
     try {
-      const json = await axios.get(
-        "http://localhost:3001/pokemons?name=" + payload
-      );
+      const json = await axios.get(`${BACK_URL}/pokemons?name=` + payload);
       return dispatch({
         type: "GET_NAME_POKEMONS",
         payload: json.data,
@@ -111,9 +110,7 @@ export function cleanDetail() {
 export function deletePokemon(id) {
   return async function (dispatch) {
     try {
-      const json = await axios.delete(
-        "http://localhost:3001/pokemons/delete/" + id
-      );
+      const json = await axios.delete(`${BACK_URL}/pokemons/delete/` + id);
       return dispatch({
         type: "DELETE_POKEMON",
         payload: json.data,
